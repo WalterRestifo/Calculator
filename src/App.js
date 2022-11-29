@@ -3,12 +3,27 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const calculatorButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+let displayNumberA;
+let displayNumberB;
 
 export default function App() {
   const [display, setDisplay] = useState("");
 
   function handleClick(number) {
     return setDisplay(display + number);
+  }
+
+  // function handleAdd(symbol){
+
+  //   return setDisplay(display + symbol);
+  // }
+
+  function handleCalculate() {
+    const arrOfNumbersDividedByPlus = display
+      .split("+")
+      .map((stringOfANumber) => parseInt(stringOfANumber, 10));
+
+    return setDisplay(arrOfNumbersDividedByPlus.reduce((a, b) => a + b));
   }
 
   function handleDelete() {
@@ -26,6 +41,7 @@ export default function App() {
           minLength="10"
           value={display}
           placeholder="0"
+          readOnly
         />
 
         {calculatorButtons.map((numberOfTheButton) => {
@@ -38,6 +54,8 @@ export default function App() {
             </button>
           );
         })}
+        <button onClick={() => handleClick("+")}>+</button>
+        <button onClick={handleCalculate}>=</button>
         <button onClick={handleDelete}>Delete</button>
       </StyledBody>
     </>
