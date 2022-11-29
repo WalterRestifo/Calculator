@@ -13,11 +13,6 @@ export default function App() {
     return setDisplay(display + number);
   }
 
-  // function handleAdd(symbol){
-
-  //   return setDisplay(display + symbol);
-  // }
-
   function handleCalculate() {
     const arrOfNumbersDividedByPlus = display
       .split("+")
