@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const calculatorButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-let displayNumberA;
-let displayNumberB;
 
 export default function App() {
   const [display, setDisplay] = useState("");
