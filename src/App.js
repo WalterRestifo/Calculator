@@ -2,13 +2,29 @@ import "./App.css";
 import styled from "styled-components";
 import { useState } from "react";
 
-const calculatorButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const calculatorButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function App() {
   const [display, setDisplay] = useState("");
 
   function handleClick(number) {
     return setDisplay(display + number);
+  }
+
+  function handleZero() {
+    if (display === "" || display.charAt(display.length - 1) === "+") {
+      return;
+    } else {
+      return setDisplay(display + 0);
+    }
+  }
+
+  function handleAdd() {
+    if (display.charAt(display.length - 1) === "+") {
+      return;
+    } else {
+      return setDisplay(display + "+");
+    }
   }
 
   function handleCalculate() {
@@ -47,7 +63,8 @@ export default function App() {
             </button>
           );
         })}
-        <button onClick={() => handleClick("+")}>+</button>
+        <button onClick={handleZero}>0</button>
+        <button onClick={handleAdd}>+</button>
         <button onClick={handleCalculate}>=</button>
         <button onClick={handleDelete}>Delete</button>
       </StyledBody>
