@@ -2,7 +2,7 @@ import "./App.css";
 import styled from "styled-components";
 import { useState } from "react";
 
-const calculatorButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const calculatorButtonsWithNormalBehavior = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function App() {
   const [display, setDisplay] = useState("");
@@ -53,7 +53,7 @@ export default function App() {
           readOnly
         />
 
-        {calculatorButtons.map((numberOfTheButton) => {
+        {calculatorButtonsWithNormalBehavior.map((numberOfTheButton) => {
           return (
             <button
               key={numberOfTheButton}
