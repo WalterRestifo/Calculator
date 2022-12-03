@@ -13,22 +13,18 @@ export default function App() {
 
   function handleClick(number) {
     setDisplay(display + number);
-    return;
   }
 
   function handleZero() {
     checkIfDisplayable(display) && setDisplay(display + 0);
-    return;
   }
 
   function handleAdd() {
     checkIfDisplayable(display) && setDisplay(display + "+");
-    return;
   }
 
   function handleSub() {
     checkIfDisplayable(display) && setDisplay(display + "-");
-    return;
   }
 
   function handleCalculate() {
@@ -38,12 +34,14 @@ export default function App() {
       sumMinusNumbers(display),
     ];
     setDisplay(result.reduce((a, b) => a + b).toString());
-    return;
   }
 
-  function handleDelete() {
+  function handleDeleteOne() {
+    setDisplay(display.split("").slice(0, -1).join(""));
+  }
+
+  function handleDeleteAll() {
     setDisplay("");
-    return;
   }
 
   return (
@@ -74,7 +72,8 @@ export default function App() {
         <button onClick={handleAdd}>+</button>
         <button onClick={handleSub}>-</button>
         <button onClick={handleCalculate}>=</button>
-        <button onClick={handleDelete}>Delete</button>
+        <button onClick={handleDeleteOne}>↩️</button>
+        <button onClick={handleDeleteAll}>C</button>
       </StyledBody>
     </>
   );
