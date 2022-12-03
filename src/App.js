@@ -12,7 +12,8 @@ export default function App() {
   const [display, setDisplay] = useState("");
 
   function handleClick(number) {
-    return setDisplay(display + number);
+    setDisplay(display + number);
+    return;
   }
 
   function handleZero() {
@@ -39,11 +40,13 @@ export default function App() {
       sumPlusNumbers(display),
       sumMinusNumbers(display),
     ];
-    return setDisplay(result.reduce((a, b) => a + b).toString());
+    setDisplay(result.reduce((a, b) => a + b).toString());
+    return;
   }
 
   function handleDelete() {
-    return setDisplay("");
+    setDisplay("");
+    return;
   }
 
   return (
