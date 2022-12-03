@@ -17,20 +17,17 @@ export default function App() {
   }
 
   function handleZero() {
-    const isDisplayable = checkIfDisplayable(display);
-    isDisplayable && setDisplay(display + 0);
+    checkIfDisplayable(display) && setDisplay(display + 0);
     return;
   }
 
   function handleAdd() {
-    const isDisplayable = checkIfDisplayable(display);
-    isDisplayable && setDisplay(display + "+");
+    checkIfDisplayable(display) && setDisplay(display + "+");
     return;
   }
 
   function handleSub() {
-    const isDisplayable = checkIfDisplayable(display);
-    isDisplayable && setDisplay(display + "-");
+    checkIfDisplayable(display) && setDisplay(display + "-");
     return;
   }
 
