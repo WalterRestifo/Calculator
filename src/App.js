@@ -44,39 +44,28 @@ export default function App() {
   }
 
   function handleCalculate() {
-    let sumOfPlus = 0;
-    let sumOfMinus = 0;
+    const plusStrings = display.match(/\+\d+/g);
+    const minusStrings = display.match(/-\d+/g);
+    const firstString = display.match(/^\d+/g);
 
-    const stringsToAdd = display
-      .split("+")
-      .filter((stringOfANumber) => /^\d+$/.test(stringOfANumber));
-    if (stringsToAdd.length !== 0) {
-      sumOfPlus = stringsToAdd
-        .map((stringOfANumber) => parseInt(stringOfANumber, 10))
-        .reduce((a, b) => a + b);
+    let plusNumbers = [0, 0];
+    let minusNumbers = [0, 0];
+    let firstNumber = [0, 0];
+
+    if (plusStrings) {
+      plusNumbers = plusStrings.map((string) => parseInt(string));
+    }
+    if (minusStrings) {
+      minusNumbers = minusStrings.map((string) => parseInt(string));
+    }
+    if (firstString) {
+      firstNumber = parseInt(firstString);
     }
 
-    const stringsToSubtract = display
-      .split("+")
-      .filter((string) => string.includes("-"));
-    if (stringsToSubtract.length !== 0) {
-      sumOfMinus = stringsToSubtract
-        .map((string) => string.split("-"))
-        .map((array) => array.reduce((a, b) => a - b))
-        .reduce((a, b) => a + b);
-    }
-
-    const result = [sumOfPlus, sumOfMinus];
-    console.log("sumOfMinus: ", sumOfMinus);
-    console.log("sumOfPlus: ", sumOfPlus);
-
-    return setDisplay(
-      result
-        .reduce((a, b) => {
-          return a + b;
-        })
-        .toString()
-    );
+    const sumOfPlusNumbers = plusNumbers.reduce((a, b) => a + b);
+    const sumOfMinusNumbers = minusNumbers.reduce((a, b) => a + b);
+    const result = [firstNumber, sumOfPlusNumbers, sumOfMinusNumbers];
+    return setDisplay(result.reduce((a, b) => a + b).toString());
   }
 
   function handleDelete() {
