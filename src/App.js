@@ -22,17 +22,61 @@ export default function App() {
   function handleAdd() {
     if (display.charAt(display.length - 1) === "+") {
       return;
+    } else if (display.charAt(display.length - 1) === "-") {
+      return;
+    } else if (display.length === 0) {
+      return;
     } else {
       return setDisplay(display + "+");
     }
   }
 
-  function handleCalculate() {
-    const arrOfNumbersDividedByPlus = display
-      .split("+")
-      .map((stringOfANumber) => parseInt(stringOfANumber, 10));
+  function handleSub() {
+    if (display.charAt(display.length - 1) === "+") {
+      return;
+    } else if (display.charAt(display.length - 1) === "-") {
+      return;
+    } else if (display.length === 0) {
+      return;
+    } else {
+      return setDisplay(display + "-");
+    }
+  }
 
-    return setDisplay(arrOfNumbersDividedByPlus.reduce((a, b) => a + b));
+  function handleCalculate() {
+    let sumOfPlus = 0;
+    let sumOfMinus = 0;
+
+    const stringsToAdd = display
+      .split("+")
+      .filter((stringOfANumber) => /^\d+$/.test(stringOfANumber));
+    if (stringsToAdd.length !== 0) {
+      sumOfPlus = stringsToAdd
+        .map((stringOfANumber) => parseInt(stringOfANumber, 10))
+        .reduce((a, b) => a + b);
+    }
+
+    const stringsToSubtract = display
+      .split("+")
+      .filter((string) => string.includes("-"));
+    if (stringsToSubtract.length !== 0) {
+      sumOfMinus = stringsToSubtract
+        .map((string) => string.split("-"))
+        .map((array) => array.reduce((a, b) => a - b))
+        .reduce((a, b) => a + b);
+    }
+
+    const result = [sumOfPlus, sumOfMinus];
+    console.log("sumOfMinus: ", sumOfMinus);
+    console.log("sumOfPlus: ", sumOfPlus);
+
+    return setDisplay(
+      result
+        .reduce((a, b) => {
+          return a + b;
+        })
+        .toString()
+    );
   }
 
   function handleDelete() {
@@ -65,6 +109,7 @@ export default function App() {
         })}
         <button onClick={handleZero}>0</button>
         <button onClick={handleAdd}>+</button>
+        <button onClick={handleSub}>-</button>
         <button onClick={handleCalculate}>=</button>
         <button onClick={handleDelete}>Delete</button>
       </StyledBody>
