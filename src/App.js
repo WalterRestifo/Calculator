@@ -1,6 +1,10 @@
 import "./App.css";
 import styled from "styled-components";
 import { useState } from "react";
+import { sumPlusNumbers } from "./lib/calculateFunctions";
+import { sumMinusNumbers } from "./lib/calculateFunctions";
+import { recognizeFirstNumber } from "./lib/calculateFunctions";
+import { checkIfDisplayable } from "./lib/calculateFunctions";
 
 const calculatorButtonsWithNormalBehavior = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -12,59 +16,29 @@ export default function App() {
   }
 
   function handleZero() {
-    if (display === "" || display.charAt(display.length - 1) === "+") {
-      return;
-    } else {
-      return setDisplay(display + 0);
-    }
+    const isDisplayable = checkIfDisplayable(display);
+    isDisplayable && setDisplay(display + 0);
+    return;
   }
 
   function handleAdd() {
-    if (display.charAt(display.length - 1) === "+") {
-      return;
-    } else if (display.charAt(display.length - 1) === "-") {
-      return;
-    } else if (display.length === 0) {
-      return;
-    } else {
-      return setDisplay(display + "+");
-    }
+    const isDisplayable = checkIfDisplayable(display);
+    isDisplayable && setDisplay(display + "+");
+    return;
   }
 
   function handleSub() {
-    if (display.charAt(display.length - 1) === "+") {
-      return;
-    } else if (display.charAt(display.length - 1) === "-") {
-      return;
-    } else if (display.length === 0) {
-      return;
-    } else {
-      return setDisplay(display + "-");
-    }
+    const isDisplayable = checkIfDisplayable(display);
+    isDisplayable && setDisplay(display + "-");
+    return;
   }
 
   function handleCalculate() {
-    const plusStrings = display.match(/\+\d+/g);
-    const minusStrings = display.match(/-\d+/g);
-    const firstString = display.match(/^\d+/g);
-
-    let plusNumbers = [0, 0];
-    let minusNumbers = [0, 0];
-    let firstNumber = 0;
-
-    if (plusStrings) {
-      plusNumbers = plusStrings.map((string) => parseInt(string));
-    }
-    if (minusStrings) {
-      minusNumbers = minusStrings.map((string) => parseInt(string));
-    }
-    if (firstString) {
-      firstNumber = parseInt(firstString);
-    }
-
-    const sumOfPlusNumbers = plusNumbers.reduce((a, b) => a + b);
-    const sumOfMinusNumbers = minusNumbers.reduce((a, b) => a + b);
-    const result = [firstNumber, sumOfPlusNumbers, sumOfMinusNumbers];
+    const result = [
+      recognizeFirstNumber(display),
+      sumPlusNumbers(display),
+      sumMinusNumbers(display),
+    ];
     return setDisplay(result.reduce((a, b) => a + b).toString());
   }
 
