@@ -50,7 +50,7 @@ export default function App() {
 
     let plusNumbers = [0, 0];
     let minusNumbers = [0, 0];
-    let firstNumber = [0, 0];
+    let firstNumber = 0;
 
     if (plusStrings) {
       plusNumbers = plusStrings.map((string) => parseInt(string));
